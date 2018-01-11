@@ -19,6 +19,7 @@ source 'https://rubygems.org'
    gem 'web-console', '~> 2.0'
    gem 'rspec-rails', '~> 3.0'
    gem 'rails-controller-testing'
+   gem 'letter_opener'
  end
 
  # Use Puma as the app server
