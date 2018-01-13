@@ -1,0 +1,22 @@
+<div class="row">
+  <h2 class="text-center">Wikis</h2>
+</div>
+
+<div class="row my-table">
+  <div class="col-md-8 col-md-offset-2">
+    <table class="table table-striped">
+      <tbody>
+        <% @wikis.each do |wiki| %>
+          <tr>
+            <td scope="row"><%= link_to wiki.title, wiki_path(id: wiki.id)  %></td>
+            <td><%= link_to "Edit", edit_wiki_path(id: wiki.id), class: 'btn btn-link' %></td>
+            <td><%= link_to "Delete", wiki_path(id: wiki.id), method: :delete, class: 'btn btn-danger btn-sm' %></td>
+          </tr>
+        <%end%>
+      </tbody>
+    </table>
+    <div class="text-center">
+      <%= link_to "New Wiki", new_wiki_path, class: 'btn btn-success text-center' %>
+    </div>
+  </div>
+</div>

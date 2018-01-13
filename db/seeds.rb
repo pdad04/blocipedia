@@ -1,7 +1,54 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
+require 'random_data'
+5.times do
+  User.create!(
+    email:    RandomData.random_email,
+    password: RandomData.random_sentence
+  )
+end
+users = User.all
+
+# # Create topics
+# 15.times do
+#   Topic.create!(
+#     name:         RandomData.random_sentence,
+#     description:  RandomData.random_paragraph
+#   )
+# end
+# topics = Topic.all
+
+# Create Posts
+5.times do
+  wiki = Wiki.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph, private: false, user: users.sample)
+end
+
+User.create!(
+  email: "andre_dean@me.com",
+  password: "nemito"
+)
+
+wikis = Wiki.all
+
+# 100.times do
+#   Comment.create!(
+#     user: users.sample,
+#     post: posts.sample,
+#     body: RandomData.random_paragraph
+#   )
+# end
 #
-# Examples:
+# admin = User.create!(
+#   name:     'Admin User',
+#   email:    'admin@example.com',
+#   password: 'helloworld',
+#   role:     'admin'
+# )
 #
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+# member = User.create!(
+#   name:     'Member User',
+#   email:    'member@example.com',
+#   password: 'helloworld'
+# )
+
+puts "Seed finished"
+puts "#{User.count} users created"
+puts "#{Wiki.count} wikis created"
