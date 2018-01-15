@@ -20,6 +20,7 @@ source 'https://rubygems.org'
    gem 'rspec-rails', '~> 3.0'
    gem 'rails-controller-testing'
    gem 'letter_opener'
+   gem 'faker'
  end
 
  # Use Puma as the app server

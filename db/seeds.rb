@@ -1,10 +1,17 @@
 require 'random_data'
+require 'faker'
+
 5.times do
   User.create!(
-    email:    RandomData.random_email,
-    password: RandomData.random_sentence
+    email: Faker::Internet.email,
+    password: Faker::Internet.password
   )
 end
+
+User.create!(
+  email: "andre_dean@me.com",
+  password: "nemito"
+)
 users = User.all
 
 # # Create topics
@@ -16,15 +23,10 @@ users = User.all
 # end
 # topics = Topic.all
 
-# Create Posts
+# Create Wiki's
 5.times do
-  wiki = Wiki.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph, private: false, user: users.sample)
+  wiki = Wiki.create!(title: Faker::Lorem.sentence, body: Faker::Lorem.paragraph, private: false, user: users.sample)
 end
-
-User.create!(
-  email: "andre_dean@me.com",
-  password: "nemito"
-)
 
 wikis = Wiki.all
 
