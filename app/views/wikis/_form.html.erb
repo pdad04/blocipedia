@@ -21,7 +21,11 @@
   <%end%>
   <div class="form-group">
     <%= f.label :private, class: 'checkbox my-checkbox' do %>
-      <%= f.check_box :private %> Private Wiki
+      <% if current_user.standard? %>
+        <%= f.check_box :private, disabled: true %> Private Wiki
+      <% else %>
+        <%= f.check_box :private %> Private Wiki
+      <%end%>
     <%end%>
   </div>
   <%= f.submit "Save", class: 'btn btn-success' %>

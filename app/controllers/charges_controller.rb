@@ -1,5 +1,12 @@
 class ChargesController < ApplicationController
   def create
+
+    if current_user.premium?
+      current_user.standard!
+      redirect_to edit_user_registration_path
+      return
+    end
+
     # Creates a Stripe Customer Object, for associating with the charge
     customer = Stripe::Customer.create(
       email: current_user.email,
