@@ -5,6 +5,8 @@ Rails.application.routes.draw do
 
   devise_for :users
 
+  put '/account_downgrades' => 'account_downgrades#account_downgrade', as: 'downgrades'
+
   get 'welcome/about'
 
   root 'welcome#index'

@@ -12,10 +12,7 @@ class WikisController < ApplicationController
   end
 
   def create
-    @wiki = Wiki.new
-    @wiki.title = params[:wiki][:title]
-    @wiki.body = params[:wiki][:body]
-    @wiki.private = params[:wiki][:private]
+    @wiki = Wiki.new(wiki_params)
     @wiki.user = current_user
 
     if @wiki.save
@@ -36,9 +33,7 @@ class WikisController < ApplicationController
 
     authorize @wiki
 
-    @wiki.title = params[:wiki][:title]
-    @wiki.body = params[:wiki][:body]
-    @wiki.private = params[:wiki][:private]
+    @wiki.assign_attributes(wiki_params)
 
     if @wiki.save
       flash[:notice] = "Wiki was updated"
@@ -59,5 +54,11 @@ class WikisController < ApplicationController
     end
 
     redirect_to wikis_path
+  end
+
+  private
+
+  def wiki_params
+    params.require(:wiki).permit(:title, :body, :private)
   end
 end

@@ -42,7 +42,7 @@
   <%= link_to "Upgrade to paid account", new_charge_path, class: 'btn btn-success' %>
 <%else%>
   <h2>Downgrade Account</h2>
-  <%= button_to "Downgrade to standard", charges_path, class: 'btn btn-warning', data: { confirm: "You will no longer be able to create private Wiki's. Are you sure?"} %>
+  <%= button_to "Downgrade to standard", downgrades_path, class: 'btn btn-warning', method: :put, data: { confirm: "Your private Wiki's will become public! Are you sure you want to downgrade?"} %>
 <%end%>
 
 <h3>Cancel my account</h3>

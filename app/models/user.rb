@@ -9,4 +9,16 @@ class User < ApplicationRecord
   after_initialize { self.role ||= :standard }
 
   enum role: [:admin, :standard, :premium]
+
+  def premium_to_standard
+    self.standard!
+    make_wikis_public
+  end
+
+  def make_wikis_public
+    self.wikis.each do |w|
+      w.update_attribute(:private, false)
+    end
+  end
+
 end
