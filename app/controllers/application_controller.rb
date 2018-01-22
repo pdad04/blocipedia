@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   include Pundit
+
   protect_from_forgery with: :exception
   before_action :authenticate_user!
 
@@ -13,10 +14,4 @@ class ApplicationController < ActionController::Base
     new_user_session_path
   end
 
-end
-
-class Amount
-  def self.default
-    15_00
-  end
 end
