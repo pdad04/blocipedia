@@ -1,6 +1,3 @@
-# require '/Users/Andre/Documents/Bloc_Projects/code/blocipedia/app/lib/upgrade_amount'
-require_relative '../lib/upgrade_amount'
-
 class ChargesController < ApplicationController
   def create
 
