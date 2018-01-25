@@ -7,6 +7,8 @@ Rails.application.routes.draw do
 
   put '/account_downgrades' => 'account_downgrades#account_downgrade', as: 'downgrades'
 
+  put '/wikis' => 'wikis#collaborators', as: 'collaborators'
+
   get 'welcome/about'
 
   root 'welcome#index'

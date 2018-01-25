@@ -1,6 +1,6 @@
 class WikisController < ApplicationController
   def index
-    @wikis = Wiki.all
+    @wikis = policy_scope(Wiki)
   end
 
   def show
@@ -26,6 +26,7 @@ class WikisController < ApplicationController
 
   def edit
     @wiki = Wiki.find(params[:id])
+    @users = User.all
   end
 
   def update
@@ -34,8 +35,8 @@ class WikisController < ApplicationController
     authorize @wiki
 
     @wiki.assign_attributes(wiki_params)
-
-    if @wiki.save
+    p @wiki.collaborators
+    if @wiki.save &&
       flash[:notice] = "Wiki was updated"
       redirect_to @wiki
     else
@@ -56,9 +57,12 @@ class WikisController < ApplicationController
     redirect_to wikis_path
   end
 
+  def collaborators
+  end
+
   private
 
   def wiki_params
-    params.require(:wiki).permit(:title, :body, :private)
+    params.require(:wiki).permit(:title, :body, :private, :collaborators)
   end
 end
