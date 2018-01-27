@@ -35,8 +35,15 @@ class WikisController < ApplicationController
     authorize @wiki
 
     @wiki.assign_attributes(wiki_params)
-    p @wiki.collaborators
-    if @wiki.save &&
+
+    if params[:collaborator_ids]
+      params[:collaborator_ids].each do |c|
+        @wiki.collaborators << Collaborator.create(wiki_id: @wiki.id, user_id: c)
+      end
+    end
+
+
+    if @wiki.save
       flash[:notice] = "Wiki was updated"
       redirect_to @wiki
     else
@@ -57,12 +64,9 @@ class WikisController < ApplicationController
     redirect_to wikis_path
   end
 
-  def collaborators
-  end
-
   private
 
   def wiki_params
-    params.require(:wiki).permit(:title, :body, :private, :collaborators)
+    params.require(:wiki).permit(:title, :body, :private)
   end
 end

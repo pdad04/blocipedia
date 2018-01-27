@@ -35,8 +35,8 @@
         <% @users.each do |u| %>
           <tr>
             <td scope="row"><%= u.email %></td>
-            <td><%= link_to "Collaborator","#", method: :put, class: 'btn btn-sm btn-success' %></td>
-            <!-- <td><%= check_box_tag 'collaborators[]', u %></td> -->
+            <!-- <td><%= link_to "Collaborator","#", method: :put, class: 'btn btn-sm btn-success' %></td> -->
+            <td><%= check_box_tag 'collaborator_ids[]', u.id %></td>
           </tr>
         <%end%>
       </tbody>

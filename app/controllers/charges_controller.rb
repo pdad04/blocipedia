@@ -22,9 +22,9 @@ class ChargesController < ApplicationController
     flash[:notice] = "Thanks for all the money, #{current_user.email}! Feel free to pay me again."
     redirect_to edit_user_registration_path
 
-    rescue Stripe::CardError => e
-      flash[:alert] = e.message
-      redirect_to new_charge_path
+  rescue Stripe::CardError => e
+    flash[:alert] = e.message
+    redirect_to new_charge_path
   end
 
   def new
