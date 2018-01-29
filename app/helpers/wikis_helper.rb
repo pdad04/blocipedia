@@ -5,4 +5,8 @@ module WikisHelper
 
     markdown.render(text).html_safe
   end
+
+  def is_collaborator?(user, wiki)
+    wiki.users.include?(User.find(user.to_i))
+  end
 end

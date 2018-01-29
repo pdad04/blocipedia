@@ -26,7 +26,7 @@ class WikisController < ApplicationController
 
   def edit
     @wiki = Wiki.find(params[:id])
-    @users = User.all
+    @users = User.where.not(id: current_user.id)
   end
 
   def update
@@ -36,11 +36,20 @@ class WikisController < ApplicationController
 
     @wiki.assign_attributes(wiki_params)
 
-    if params[:collaborator_ids]
-      params[:collaborator_ids].each do |c|
-        @wiki.collaborators << Collaborator.create(wiki_id: @wiki.id, user_id: c)
+    User.all.each do |u|
+      if params[:wiki][:collaborator_ids] && params[:wiki][:collaborator_ids].include?(u.id.to_s)
+        @wiki.users << u
+      else
+        @wiki.users.delete(u)
       end
     end
+
+    # # Add collaborators access to users which were selected
+    # if params[:wiki][:collaborator_ids]
+    #   params[:wiki][:collaborator_ids].each do |c|
+    #     @wiki.users << User.find(c.to_i)
+    #   end
+    # end
 
 
     if @wiki.save

@@ -28,5 +28,24 @@
       <%end%>
     <%end%>
   </div>
+  <% if wiki.user_id == current_user.id %>
+  <div>
+    <h2>Collaborators</h2>
+    <table class="table table-striped">
+      <tbody>
+        <% @users.each do |u| %>
+          <tr>
+            <td scope="row"><%= u.email %></td>
+            <% if is_collaborator?(u.id, wiki) %>
+              <td><%= check_box_tag 'wiki[collaborator_ids][]', u.id, checked: true %></td>
+            <% else %>
+              <td><%= check_box_tag 'wiki[collaborator_ids][]', u.id %></td>
+            <%end%>
+          </tr>
+        <%end%>
+      </tbody>
+    </table>
+  </div>
+  <% end %>
   <%= f.submit "Save", class: 'btn btn-success' %>
 <%end%>

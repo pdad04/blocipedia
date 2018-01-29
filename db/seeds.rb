@@ -10,6 +10,12 @@ end
 
 User.create!(
   email: "andre_dean@me.com",
+  password: "nemito",
+  role: 'premium'
+)
+
+User.create!(
+  email: "andre_dean@icloud.com",
   password: "nemito"
 )
 users = User.all
