@@ -24,12 +24,12 @@
       <% if current_user.standard? %>
         <%= f.check_box :private, disabled: true %> Private Wiki
       <% else %>
-        <%= f.check_box :private %> Private Wiki
+        <%= f.check_box :private, onclick: 'showUsers()'  %> Private Wiki
       <%end%>
     <%end%>
   </div>
   <% if wiki.user_id == current_user.id %>
-  <div>
+  <div class='collaborator-form'>
     <h2>Collaborators</h2>
     <table class="table table-striped">
       <tbody>
@@ -49,3 +49,13 @@
   <% end %>
   <%= f.submit "Save", class: 'btn btn-success' %>
 <%end%>
+<script type="text/javascript">
+  c = document.getElementsByClassName('collaborator-form');
+  cb = document.querySelectorAll('input[type=checkbox]');
+  console.log(cb)
+  if(cb[0].checked === true){
+    c[0].style.display = "initial";
+  }else{
+    c[0].style.display = "none";
+  }
+</script>

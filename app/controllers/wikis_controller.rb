@@ -36,11 +36,17 @@ class WikisController < ApplicationController
 
     @wiki.assign_attributes(wiki_params)
 
-    User.all.each do |u|
-      if params[:wiki][:collaborator_ids] && params[:wiki][:collaborator_ids].include?(u.id.to_s)
-        @wiki.users << u
-      else
-        @wiki.users.delete(u)
+    if @wiki.user_id == current_user.id
+      User.all.each do |u|
+        if params[:wiki][:collaborator_ids] && params[:wiki][:collaborator_ids].include?(u.id.to_s)
+          @wiki.users << u
+        else
+          @wiki.users.delete(u)
+        end
+      end
+
+      if params[:wiki][:private] == "0"
+        @wiki.users.clear
       end
     end
 

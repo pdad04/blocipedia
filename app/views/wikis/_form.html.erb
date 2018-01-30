@@ -24,7 +24,7 @@
       <% if current_user.standard? %>
         <%= f.check_box :private, disabled: true %> Private Wiki
       <% else %>
-        <%= f.check_box :private %> Private Wiki
+        <%= f.check_box :private, onclick: 'showUsers()' %> Private Wiki
       <%end%>
     <%end%>
   </div>
