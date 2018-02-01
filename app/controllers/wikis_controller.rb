@@ -36,6 +36,7 @@ class WikisController < ApplicationController
 
     @wiki.assign_attributes(wiki_params)
 
+    # Only check if collaborators are added/removed when Wiki owner performs edit.
     if @wiki.user_id == current_user.id
       User.all.each do |u|
         if params[:wiki][:collaborator_ids] && params[:wiki][:collaborator_ids].include?(u.id.to_s)
@@ -45,6 +46,8 @@ class WikisController < ApplicationController
         end
       end
 
+      # Private wiki unchecked should clear collaborators
+      # Since wiki will be public all users will have access anyways.
       if params[:wiki][:private] == "0"
         @wiki.users.clear
       end

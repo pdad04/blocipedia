@@ -5,10 +5,6 @@
 </div>
 <div class="row">
   <div class="col-md-8">
-    <% if @wiki.private %>
       <%= render partial: 'edit_form', locals: { wiki: @wiki } %>
-    <% else %>
-      <%= render partial: 'edit_form', locals: {wiki: @wiki } %>
-    <%end%>
   </div>
 </div>

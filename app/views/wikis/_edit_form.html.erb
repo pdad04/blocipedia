@@ -49,10 +49,12 @@
   <% end %>
   <%= f.submit "Save", class: 'btn btn-success' %>
 <%end%>
+
+<!--Toggle the collaborator table given 'private' checkbox state.
+    If unchecked collaborators should not be visible if checked it should be -->
 <script type="text/javascript">
   c = document.getElementsByClassName('collaborator-form');
   cb = document.querySelectorAll('input[type=checkbox]');
-  console.log(cb)
   if(cb[0].checked === true){
     c[0].style.display = "initial";
   }else{
